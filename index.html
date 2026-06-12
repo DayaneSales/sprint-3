@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banner Científico – Projeto de Extensão Modelagem</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #1a3a6b;
+    --blue:    #1a3a6b;
+    --mid:     #2563a8;
+    --accent:  #3b82d4;
+    --sky:     #bfd7f5;
+    --pale:    #e8f2fc;
+    --white:   #ffffff;
+    --gold:    #c9a84c;
+    --text:    #0d1b2e;
+    --muted:   #4a6080;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #e8f0f8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 10px;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .banner {
+    width: 900px;
+    background: var(--white);
+    box-shadow: 0 8px 60px rgba(10,22,40,0.18);
+    border: 2px solid var(--blue);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--mid) 100%);
+    padding: 28px 36px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.08);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .logo-box {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 6px 14px;
+    flex-shrink: 0;
+  }
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: 3px;
+  }
+  .logo-sub {
+    font-size: 8px;
+    color: var(--blue);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .header-meta {
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+  .header-meta strong { color: var(--sky); }
+  .title-block { position: relative; z-index: 1; }
+  .banner-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.25;
+    letter-spacing: 0.3px;
+  }
+  .banner-subtitle {
+    font-size: 13px;
+    color: var(--sky);
+    margin-top: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .authors {
+    margin-top: 14px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .author-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 5px 14px;
+  }
+  .author-chip .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .author-chip span {
+    font-size: 11.5px;
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .author-chip small {
+    font-size: 10px;
+    color: var(--sky);
+    font-weight: 300;
+  }
+  .gold-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), #e8c97a, var(--gold));
+  }
+
+  /* ── BODY GRID ── */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    background: var(--pale);
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-right: 1px solid rgba(26,58,107,0.12);
+  }
+  .col:last-child { border-right: none; }
+
+  .card {
+    background: var(--white);
+    padding: 18px 18px 14px;
+    border-bottom: 1px solid rgba(26,58,107,0.10);
+  }
+  .card.pale { background: var(--pale); }
+  .card.blue-tint { background: #f0f6ff; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .section-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--mid);
+    border-radius: 3px;
+    padding: 2px 7px;
+    letter-spacing: 1px;
+  }
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .body-text {
+    font-size: 11.5px;
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  .body-text strong { color: var(--blue); font-weight: 700; }
+
+  /* highlight box */
+  .highlight {
+    background: linear-gradient(135deg, var(--navy), var(--mid));
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+  .highlight p {
+    font-size: 11px;
+    color: var(--sky);
+    line-height: 1.6;
+  }
+  .highlight strong { color: var(--white); }
+
+  /* stat pills */
+  .stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+  }
+  .stat-pill {
+    background: var(--pale);
+    border: 1px solid var(--sky);
+    border-radius: 20px;
+    padding: 4px 11px;
+    font-size: 10.5px;
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .stat-pill span { color: var(--mid); font-weight: 700; }
+
+  /* table */
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 10.5px;
+  }
+  .mini-table th {
+    background: var(--blue);
+    color: var(--white);
+    padding: 5px 8px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .mini-table td {
+    padding: 5px 8px;
+    color: var(--text);
+    border-bottom: 1px solid var(--pale);
+  }
+  .mini-table tr:nth-child(even) td { background: #f4f8fd; }
+
+  /* step list */
+  .step-list { margin-top: 8px; }
+  .step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 9px;
+  }
+  .step-n {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--mid);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step p {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .step p strong { color: var(--blue); }
+
+  /* result badge */
+  .result-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f0f6ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 12px;
+    margin-top: 8px;
+  }
+  .result-badge .icon { font-size: 18px; }
+  .result-badge p { font-size: 11px; color: var(--text); line-height: 1.5; }
+  .result-badge strong { color: var(--blue); }
+
+  /* prototype photo placeholder */
+  .proto-box {
+    background: linear-gradient(160deg, #1a3a6b 0%, #2563a8 100%);
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  .proto-img-placeholder {
+    width: 100%;
+    height: 130px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .proto-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .proto-caption {
+    font-size: 10px;
+    color: var(--sky);
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FULL-WIDTH MIDDLE BAND ── */
+  .full-band {
+    grid-column: 1 / -1;
+    background: #1e4080;
+    padding: 14px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .band-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .band-items {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+  .band-item {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 11px;
+    color: var(--white);
+    line-height: 1.4;
+  }
+  .band-item strong {
+    display: block;
+    color: var(--sky);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #1a3a6b;
+    padding: 18px 28px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+  }
+  .refs h4 {
+    font-size: 10px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .refs p {
+    font-size: 9.5px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+  .qr-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .qr-frame {
+    width: 90px; height: 90px;
+    background: var(--white);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+  }
+  .qr-svg {
+    width: 68px; height: 68px;
+  }
+  .qr-caption {
+    font-size: 9px;
+    color: var(--sky);
+    text-align: center;
+    letter-spacing: 0.5px;
+    max-width: 90px;
+  }
+  .conclusion h4 {
+    font-size: 10px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-align: right;
+  }
+  .conclusion p {
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    text-align: right;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: none; padding: 0; }
+    .banner { box-shadow: none; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo-box">
+        <div class="logo-text">ENIAC</div>
+        <small class="logo-sub">Centro Universitário de Excelência</small>
+      </div>
+      <div class="header-meta">
+        <strong>Engenharia Elétrica &amp; Engenharia Mecatrônica</strong><br>
+        Projeto de Extensão — Modelagem | Sprint 3 · 2026<br>
+        Orientador: Prof. William Alexander Furtado Rodrigues
+      </div>
+    </div>
+    <div class="title-block">
+      <div class="banner-title">
+        Embalagem Protetora para Componentes Eletrônicos<br>de Alto Valor: Da Modelagem ao Protótipo Físico
+      </div>
+      <div class="banner-subtitle">Impressão 3D FDM · Filamento PLA · Creality K1C · Geometria Otimizada</div>
+      <div class="authors">
+        <div class="author-chip">
+          <div class="dot"></div>
+          <div>
+            <span>Dayane Aparecida Rodrigues de Sales</span><br>
+            <small>RA 206522025</small>
+          </div>
+        </div>
+        <div class="author-chip">
+          <div class="dot"></div>
+          <div>
+            <span>Thamirys dos Santos Nascimento</span><br>
+            <small>RA 205732025</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- COL 1 -->
+    <div class="col">
+
+      <div class="card">
+        <div class="section-label">
+          <span class="section-num">01</span>
+          <span class="section-title">Introdução</span>
+        </div>
+        <p class="body-text">
+          O transporte e armazenamento de componentes eletrônicos de alto valor — como microcontroladores, módulos de RF e circuitos integrados — exige embalagens com <strong>proteção mecânica eficaz</strong>. Embalagens convencionais frequentemente carecem de compartimentação interna adequada, expondo os componentes a choques, vibração e danos por contato direto.
+        </p>
+        <div class="highlight">
+          <p><strong>Problema central:</strong> Ausência de estrutura interna que previna deslocamento e contato entre componentes durante o manuseio e transporte.</p>
+        </div>
+      </div>
+
+      <div class="card pale">
+        <div class="section-label">
+          <span class="section-num">02</span>
+          <span class="section-title">Objetivo</span>
+        </div>
+        <p class="body-text">
+          Desenvolver, modelar matematicamente, simular computacionalmente e fabricar fisicamente uma <strong>embalagem otimizada</strong> com nervuras internas, utilizando PLA como material estrutural e impressão 3D FDM como método de fabricação, validando a solução em protótipo funcional.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="section-label">
+          <span class="section-num">03</span>
+          <span class="section-title">Embalagem Original e Problema</span>
+        </div>
+        <p class="body-text">
+          A embalagem de referência apresentava <strong>interior sem divisórias</strong>, paredes sem reforços e sem sistema de retenção dos componentes. Os principais problemas identificados foram:
+        </p>
+        <div class="step-list" style="margin-top:10px;">
+          <div class="step">
+            <div class="step-n">▲</div>
+            <p>Componentes livres para colidir entre si durante o transporte</p>
+          </div>
+          <div class="step">
+            <div class="step-n">▲</div>
+            <p>Paredes sem nervuras — baixa resistência a cargas laterais</p>
+          </div>
+          <div class="step">
+            <div class="step-n">▲</div>
+            <p>Ausência de organização interna — dificulta inspeção e retirada</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card blue-tint">
+        <div class="section-label">
+          <span class="section-num">04</span>
+          <span class="section-title">Proposta de Melhoria Geométrica</span>
+        </div>
+        <p class="body-text">
+          A solução proposta incorpora <strong>nervuras internas (grade 2×3)</strong> criando 6 compartimentos independentes, arredondamentos nas arestas externas (R=2 mm) e internas (R=1 mm) para redução de concentração de tensões, e espessura de parede padronizada em <strong>4 mm</strong>.
+        </p>
+        <div class="stats-row">
+          <div class="stat-pill">Compartimentos: <span>6</span></div>
+          <div class="stat-pill">Paredes: <span>4 mm</span></div>
+          <div class="stat-pill">R ext: <span>2 mm</span></div>
+          <div class="stat-pill">R int: <span>1 mm</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COL 2 -->
+    <div class="col">
+
+      <div class="card">
+        <div class="section-label">
+          <span class="section-num">05</span>
+          <span class="section-title">Metodologia</span>
+        </div>
+        <div class="step-list">
+          <div class="step">
+            <div class="step-n">1</div>
+            <p><strong>Sprint 1 — Modelagem:</strong> Definição das dimensões (150×100×50 mm), propriedades do PLA (E = 3,5 GPa; σ = 40–70 MPa), simulação computacional e modelagem 3D CAD.</p>
+          </div>
+          <div style="margin:8px 0; border-radius:6px; overflow:hidden; height:90px;">
